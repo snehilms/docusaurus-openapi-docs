@@ -140,6 +140,20 @@ const sidebars = {
       items: require("./docs/petstore_versioned/1.0.0/sidebar.js"),
     },
   ],
+
+  nftapi: [
+    {
+      type: "category",
+      label: "NFT API",
+      link: {
+        type: "generated-index",
+        title: "NFT API",
+        description: "These are Propellyr NFT APIs",
+        slug: "/category/nftapi-api",
+      },
+      items: require("./docs/nftapi/sidebar.js"),
+    },
+  ],
 };
 
 module.exports = sidebars;

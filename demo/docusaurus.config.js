@@ -71,6 +71,10 @@ const config = {
                 label: "Petstore (versioned)",
                 to: "/category/petstore-versioned-api",
               },
+              {
+                label: "NFTApi",
+                to: "/category/nftapi-api",
+              },
             ],
           },
           {
@@ -167,6 +171,14 @@ const config = {
           petstore: {
             specPath: "examples/petstore.yaml",
             outputDir: "docs/petstore",
+            sidebarOptions: {
+              groupPathsBy: "tag",
+              categoryLinkSource: "tag",
+            },
+          },
+          nftapi: {
+            specPath: "examples/nftapi.yaml",
+            outputDir: "docs/nftapi",
             sidebarOptions: {
               groupPathsBy: "tag",
               categoryLinkSource: "tag",

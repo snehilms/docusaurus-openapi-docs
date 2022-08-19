@@ -1,0 +1,586 @@
+openapi: 3.0.1
+info:
+  title: NFT API
+  description: "creates the server and deployment id, adds tags to the instance"
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: Generated server url
+security:
+  - Authorization: []
+paths:
+  /nft/v0/owners/wallet/{walletaddress}:
+    get:
+      tags:
+        - nft-owner-controller
+      operationId: getAllPreviousOwners
+      parameters:
+        - name: walletaddress
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NFTWallet"
+  /nft/v0/owners/all/{contract}/{tokenid}:
+    get:
+      tags:
+        - nft-owner-controller
+      operationId: getAllPreviousOwners_1
+      parameters:
+        - name: contract
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: tokenid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NFTOwner"
+  /nft/v0/owner/{contract}:
+    get:
+      tags:
+        - nft-owner-controller
+      operationId: getNFTOwnerByContract
+      parameters:
+        - name: contract
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NFTOwner"
+  /nft/v0/owner/{contract}/{tokenid}:
+    get:
+      tags:
+        - nft-owner-controller
+      operationId: getNFTOwnerByTokenAndContract
+      parameters:
+        - name: contract
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: tokenid
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NFTOwner"
+  /api/transactions/v0/{contractAddress}:
+    get:
+      tags:
+        - transaction-controller
+      operationId: fetchTransactionEvents
+      parameters:
+        - name: contractAddress
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TransactionEvents"
+  /api/nft/v0/{chainId}/{contractAddress}/{tokenId}:
+    get:
+      tags:
+        - nft-controller
+      operationId: getNFTByTokenId
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ETHEREUM
+              - ETHEREUM_PALM
+              - ETHEREUM_ARBITRUM
+              - HEDERA
+              - FLOW
+              - ETHEREUM_POLYGON
+        - name: contractAddress
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: tokenId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                $ref: "#/components/schemas/NFTDto"
+  /api/nft/v0/contract/{chainId}/{contractAddress}:
+    get:
+      tags:
+        - nft-controller
+      operationId: getNFTByContract
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ETHEREUM
+              - ETHEREUM_PALM
+              - ETHEREUM_ARBITRUM
+              - HEDERA
+              - FLOW
+              - ETHEREUM_POLYGON
+        - name: contractAddress
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NFTDetailsOwnerDto"
+  /api/nft/v0/assets:
+    get:
+      tags:
+        - nft-controller
+      operationId: getNFTByTokenId_1
+      parameters:
+        - name: nfts
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/NFTDto"
+  /api/nft/transfers/v0/{chain}:
+    get:
+      tags:
+        - token-transfer-event-controller
+      operationId: getHistoricalTransfersChain
+      parameters:
+        - name: chain
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ETHEREUM
+              - ETHEREUM_PALM
+              - ETHEREUM_ARBITRUM
+              - HEDERA
+              - FLOW
+              - ETHEREUM_POLYGON
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TokenTransferEvent"
+  /api/nft/transfers/v0/{chain}/wallets:
+    get:
+      tags:
+        - token-transfer-event-controller
+      operationId: getHistoricalTransfersChainAndWalletAddresses
+      parameters:
+        - name: chain
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ETHEREUM
+              - ETHEREUM_PALM
+              - ETHEREUM_ARBITRUM
+              - HEDERA
+              - FLOW
+              - ETHEREUM_POLYGON
+        - name: walletAddresses
+          in: query
+          required: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TokenTransferEvent"
+  /api/nft/transfers/v0/{chainId}/{contractAddress}:
+    get:
+      tags:
+        - token-transfer-event-controller
+      operationId: getHistoricalTransfersContractAddress
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ETHEREUM
+              - ETHEREUM_PALM
+              - ETHEREUM_ARBITRUM
+              - HEDERA
+              - FLOW
+              - ETHEREUM_POLYGON
+        - name: contractAddress
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TokenTransferEvent"
+  /api/nft/transfers/v0/{chainId}/{contractAddress}/{tokenId}:
+    get:
+      tags:
+        - token-transfer-event-controller
+      operationId: getHistoricalTransfersOfNFT
+      parameters:
+        - name: chainId
+          in: path
+          required: true
+          schema:
+            type: string
+            enum:
+              - ETHEREUM
+              - ETHEREUM_PALM
+              - ETHEREUM_ARBITRUM
+              - HEDERA
+              - FLOW
+              - ETHEREUM_POLYGON
+        - name: contractAddress
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: tokenId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: OK
+          content:
+            "*/*":
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/TokenTransferEvent"
+components:
+  schemas:
+    NFTWallet:
+      type: object
+      properties:
+        tokenId:
+          type: integer
+        contractAddress:
+          type: string
+        contractName:
+          type: string
+        transactionTimestamp:
+          type: integer
+          format: int64
+    NFTOwner:
+      type: object
+      properties:
+        owner:
+          type: string
+        tokenId:
+          type: integer
+        contractAddress:
+          type: string
+        contractName:
+          type: string
+        transactionTimestamp:
+          type: integer
+          format: int64
+    TransactionEvents:
+      type: object
+      properties:
+        contractAddress:
+          type: string
+        contractName:
+          type: string
+        address:
+          type: string
+        txnHash:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        logIndex:
+          type: integer
+          format: int64
+        entrySignature:
+          type: string
+        decodedValues:
+          type: string
+        topics:
+          type: array
+          items:
+            type: string
+    NFTContractDto:
+      type: object
+      properties:
+        tokenStandard:
+          type: string
+        contractName:
+          type: string
+        tokenSymbol:
+          type: string
+    NFTDto:
+      type: object
+      properties:
+        chain:
+          type: string
+          enum:
+            - ETHEREUM
+            - ETHEREUM_PALM
+            - ETHEREUM_ARBITRUM
+            - HEDERA
+            - FLOW
+            - ETHEREUM_POLYGON
+        contractAddress:
+          type: string
+        tokenId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        videoUrl:
+          type: string
+        audioUrl:
+          type: string
+        modelUrl:
+          type: string
+        externalUrl:
+          type: string
+        backgroundColor:
+          type: string
+        createdDate:
+          type: integer
+          format: int64
+        contract:
+          $ref: "#/components/schemas/NFTContractDto"
+        extraMetadata:
+          $ref: "#/components/schemas/NFTExtraMetadataDto"
+        ownerCount:
+          type: integer
+          format: int32
+        tokenCount:
+          type: integer
+          format: int32
+        owners:
+          type: array
+          items:
+            $ref: "#/components/schemas/NFTOwner"
+        lastSale:
+          $ref: "#/components/schemas/NFTSaleDto"
+    NFTExtraMetadataDto:
+      type: object
+      properties:
+        attributes:
+          type: string
+    NFTSaleDto:
+      type: object
+      properties:
+        fromAddress:
+          type: string
+        toAddress:
+          type: string
+        quantity:
+          type: integer
+          format: int64
+        timestamp:
+          type: integer
+          format: int64
+        txnHash:
+          type: string
+        paymentToken:
+          $ref: "#/components/schemas/PaymentTokenDto"
+    PaymentTokenDto:
+      type: object
+      properties:
+        name:
+          type: string
+        symbol:
+          type: string
+        address:
+          type: string
+        decimals:
+          type: integer
+          format: int32
+    NFTDetailsOwnerDto:
+      type: object
+      properties:
+        chain:
+          type: string
+          enum:
+            - ETHEREUM
+            - ETHEREUM_PALM
+            - ETHEREUM_ARBITRUM
+            - HEDERA
+            - FLOW
+            - ETHEREUM_POLYGON
+        contractAddress:
+          type: string
+        tokenId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        imageUrl:
+          type: string
+        owner:
+          type: string
+        videoUrl:
+          type: string
+        audioUrl:
+          type: string
+        modelUrl:
+          type: string
+        externalUrl:
+          type: string
+        backgroundColor:
+          type: string
+        createdDate:
+          type: integer
+          format: int64
+        tokenStandard:
+          type: string
+        contractName:
+          type: string
+        tokenSymbol:
+          type: string
+        attributes:
+          type: string
+        fromAddress:
+          type: string
+        toAddress:
+          type: string
+        txnTimestamp:
+          type: integer
+          format: int64
+        txnHash:
+          type: string
+        currency:
+          type: string
+    TokenTransferEvent:
+      type: object
+      properties:
+        contractAddress:
+          type: string
+        contractName:
+          type: string
+        tokenId:
+          type: string
+        tokenAddress:
+          type: string
+        fromAddress:
+          type: string
+        toAddress:
+          type: string
+        txnHash:
+          type: string
+        timestamp:
+          type: integer
+          format: int64
+        blockNumber:
+          type: integer
+          format: int64
+        blockHash:
+          type: string
+        chain:
+          type: string
+          enum:
+            - ETHEREUM
+            - ETHEREUM_PALM
+            - ETHEREUM_ARBITRUM
+            - HEDERA
+            - FLOW
+            - ETHEREUM_POLYGON
+        tokenName:
+          type: string
+        logIndex:
+          type: integer
+          format: int32
+  securitySchemes:
+    Authorization:
+      type: http
+      scheme: basic

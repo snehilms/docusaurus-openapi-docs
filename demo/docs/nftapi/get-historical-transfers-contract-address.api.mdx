@@ -1,0 +1,31 @@
+---
+id: get-historical-transfers-contract-address
+sidebar_label: getHistoricalTransfersContractAddress
+hide_title: true
+hide_table_of_contents: true
+api: {"tags":["token-transfer-event-controller"],"operationId":"getHistoricalTransfersContractAddress","parameters":[{"name":"chainId","in":"path","required":true,"schema":{"type":"string","enum":["ETHEREUM","ETHEREUM_PALM","ETHEREUM_ARBITRUM","HEDERA","FLOW","ETHEREUM_POLYGON"]}},{"name":"contractAddress","in":"path","required":true,"schema":{"type":"string"}}],"responses":{"200":{"description":"OK","content":{"*/*":{"schema":{"type":"array","items":{"type":"object","properties":{"contractAddress":{"type":"string"},"contractName":{"type":"string"},"tokenId":{"type":"string"},"tokenAddress":{"type":"string"},"fromAddress":{"type":"string"},"toAddress":{"type":"string"},"txnHash":{"type":"string"},"timestamp":{"type":"integer","format":"int64"},"blockNumber":{"type":"integer","format":"int64"},"blockHash":{"type":"string"},"chain":{"type":"string","enum":["ETHEREUM","ETHEREUM_PALM","ETHEREUM_ARBITRUM","HEDERA","FLOW","ETHEREUM_POLYGON"]},"tokenName":{"type":"string"},"logIndex":{"type":"integer","format":"int32"}}}}}}}},"description":"getHistoricalTransfersContractAddress","method":"get","path":"/api/nft/transfers/v0/{chainId}/{contractAddress}","servers":[{"url":"http://localhost:8080","description":"Generated server url"}],"security":[{"Authorization":[]}],"securitySchemes":{"Authorization":{"type":"http","scheme":"basic"}},"info":{"title":"NFT API","description":"creates the server and deployment id, adds tags to the instance","version":"1.0.0"},"postman":{"name":"get Historical Transfers Contract Address","description":{"type":"text/plain"},"url":{"path":["api","nft","transfers","v0",":chainId",":contractAddress"],"host":["{{baseUrl}}"],"query":[],"variable":[{"disabled":false,"description":{"content":"(Required) ","type":"text/plain"},"type":"any","value":"","key":"chainId"},{"disabled":false,"description":{"content":"(Required) ","type":"text/plain"},"type":"any","value":"","key":"contractAddress"}]},"header":[{"key":"Accept","value":"*/*"}],"method":"GET"}}
+sidebar_class_name: "get api-method"
+info_path: nftapi/nft-api
+---
+
+import ApiTabs from "@theme/ApiTabs";
+import MimeTabs from "@theme/MimeTabs";
+import ParamsItem from "@theme/ParamsItem";
+import ResponseSamples from "@theme/ResponseSamples";
+import SchemaItem from "@theme/SchemaItem"
+import SchemaTabs from "@theme/SchemaTabs";
+import DiscriminatorTabs from "@theme/DiscriminatorTabs";
+import TabItem from "@theme/TabItem";
+
+## getHistoricalTransfersContractAddress
+
+
+
+getHistoricalTransfersContractAddress
+
+<details style={{"marginBottom":"1rem"}} data-collapsed={false} open={true}><summary style={{}}><strong>Path Parameters</strong></summary><div><ul><ParamsItem className={"paramsItem"} param={{"name":"chainId","in":"path","required":true,"schema":{"type":"string","enum":["ETHEREUM","ETHEREUM_PALM","ETHEREUM_ARBITRUM","HEDERA","FLOW","ETHEREUM_POLYGON"]}}}></ParamsItem><ParamsItem className={"paramsItem"} param={{"name":"contractAddress","in":"path","required":true,"schema":{"type":"string"}}}></ParamsItem></ul></div></details><div><ApiTabs><TabItem label={"200"} value={"200"}><div>
+
+OK
+
+</div><div><MimeTabs groupId={"mime-type"}><TabItem label={"*/*"} value={"*/*"}><SchemaTabs groupId={"schema-tabs"}><TabItem label={"Schema"} value={"Schema"}><details style={{}} data-collapsed={false} open={true}><summary style={{"textAlign":"left"}}><strong>Schema</strong><span style={{"opacity":"0.6"}}> array</span></summary><div style={{"textAlign":"left","marginLeft":"1rem"}}></div><ul style={{"marginLeft":"1rem"}}><SchemaItem collapsible={false} name={"contractAddress"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"contractName"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"tokenId"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"tokenAddress"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"fromAddress"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"toAddress"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"txnHash"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"timestamp"} required={false} schemaDescription={undefined} schemaName={"int64"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"blockNumber"} required={false} schemaDescription={undefined} schemaName={"int64"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"blockHash"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"chain"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={"**Possible values:** [`ETHEREUM`, `ETHEREUM_PALM`, `ETHEREUM_ARBITRUM`, `HEDERA`, `FLOW`, `ETHEREUM_POLYGON`]"} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"tokenName"} required={false} schemaDescription={undefined} schemaName={"string"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem><SchemaItem collapsible={false} name={"logIndex"} required={false} schemaDescription={undefined} schemaName={"int32"} qualifierMessage={undefined} defaultValue={undefined}></SchemaItem></ul></details></TabItem></SchemaTabs></TabItem></MimeTabs></div></TabItem></ApiTabs></div>
+      
